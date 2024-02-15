@@ -3,7 +3,7 @@ Repository used in the application challenge for Tunts Rocks.
 
 # Clone o repositório
 ```bash
-  git clone https://github.com/GabrielTFV/tunts-rocks-sheets-challenge-gabriel-moreira.git
+git clone https://github.com/GabrielTFV/tunts-rocks-sheets-challenge-gabriel-moreira.git
 ```
 
 # Instale o pip caso não tenha
