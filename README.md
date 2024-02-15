@@ -1,20 +1,20 @@
 # tunts-rocks-sheets-challenge-gabriel-moreira
 Repository used in the application challenge for Tunts Rocks.
 
-# Clone o repositório
-```bash
-git clone https://github.com/GabrielTFV/tunts-rocks-sheets-challenge-gabriel-moreira.git
-```
-
 # Instale o pip caso não tenha
 ## Linux or macOS:
 ```bash
 sudo apt install python3-pip
 ```
-
 ## Windows:
 ```bash
 python get-pip.py
+```
+
+# Clone o repositório
+```bash
+git clone https://github.com/GabrielTFV/tunts-rocks-sheets-challenge-gabriel-moreira.git
+cd tunts-rocks-sheets-challenge-gabriel-moreira
 ```
 
 # Instale as bibliotecas necessárias
