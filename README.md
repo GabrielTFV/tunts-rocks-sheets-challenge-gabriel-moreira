@@ -23,5 +23,6 @@ pip install -r requirements.txt --upgrade
 ```
 
 # Rode a aplicação pelo terminal
+```bash
 python sheets-gabriel-moreira.py
-
+```
