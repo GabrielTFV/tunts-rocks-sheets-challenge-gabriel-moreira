@@ -1,6 +1,7 @@
 import os.path
 import math
 import logging
+import sys
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
@@ -32,22 +33,22 @@ class Student:
     def calculate_situation(self):
         max_absences = .25*total_classes
         if self.absences > max_absences:
-            logging.info(f"{self.name} reprovou por número de faltas.")
+            logging.info(f"{self.name} has failed due to absences.")
             return "Reprovado por Falta"
 
         mean_score = self.calculate_mean_score()
         mean_score /= 10
 
         if mean_score < 5:
-            logging.info(f"{self.name} reprovou por nota baixa.")
+            logging.info(f"{self.name} has failed due to low score.")
             return "Reprovado por Nota"
         elif mean_score < 7:
             #Calculando a média final e arredondando pra cima quando necessário
             self.final_score_needed = math.ceil((50 - (mean_score*6))/4)
-            logging.info(f"{self.name} precisa fazer final. Nota necessária: {self.final_score_needed}")
+            logging.info(f"{self.name} needs to take the final exam. Score needed: {self.final_score_needed}")
             return "Exame Final"
         else:
-            logging.info(f"{self.name} foi aprovado.")
+            logging.info(f"{self.name} has been approved.")
             return "Aprovado"
 
 def update_student_situations(service, values):
@@ -83,13 +84,9 @@ def update_student_situations(service, values):
         result = service.spreadsheets().values().batchUpdate(
             spreadsheetId=scores_sheet,
             body=body).execute()
-        logging.info(f"{result.get('totalUpdatedCells')} cells updated.")
+        logging.info(f"{result.get('totalUpdatedCells')} células atualizadas.")
     except HttpError as e:
-        logging.error(f"An error occurred: {e}")
-
-
-
-
+        logging.error(f"An error has occurred: {e}")
 
 def main():
   creds = None
@@ -101,10 +98,15 @@ def main():
     if creds and creds.expired and creds.refresh_token:
       creds.refresh(Request())
     else:
-      flow = InstalledAppFlow.from_client_secrets_file(
-          "credentials.json", SCOPES
-      )
-      creds = flow.run_local_server(port=0)
+        try:
+            flow = InstalledAppFlow.from_client_secrets_file(
+                "credentials.json", SCOPES
+            )
+            creds = flow.run_local_server(port=0)
+        except FileNotFoundError as fnf_err:
+            logging.error(f"Your credentials.json was not found in this application's directory. Visit the following website for instructions o how to download your credentials: https://developers.google.com/sheets/api/quickstart/python")
+            sys.exit(1)
+
     #Salva as credenciais para rodar posteriormente sem necessidade de logar
     with open("token.json", "w") as token:
       token.write(creds.to_json())
@@ -127,7 +129,7 @@ def main():
             update_student_situations(service, values)
 
   except HttpError as err:
-    logging.error(f"An HTTP error occurred: {err}")
+    logging.error(f"A HTTP error has occurred: {err}")
 
 
 if __name__ == "__main__":
