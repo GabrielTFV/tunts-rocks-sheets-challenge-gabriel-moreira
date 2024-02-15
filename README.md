@@ -14,6 +14,8 @@ python -m pip install --upgrade pip
 # Clone o repositório
 ```bash
 git clone https://github.com/GabrielTFV/tunts-rocks-sheets-challenge-gabriel-moreira.git
+```
+```bash
 cd tunts-rocks-sheets-challenge-gabriel-moreira
 ```
 
