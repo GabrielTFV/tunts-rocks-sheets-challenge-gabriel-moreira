@@ -7,12 +7,12 @@ Repository used in the application challenge for Tunts Rocks.
 ```
 
 # Instale o pip caso não tenha
-# Linux or macOS:
+## Linux or macOS:
 ```bash
 sudo apt install python3-pip
 ```
 
-# Windows:
+## Windows:
 ```bash
 python get-pip.py
 ```
