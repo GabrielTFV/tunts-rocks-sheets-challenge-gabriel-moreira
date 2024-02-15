@@ -8,7 +8,7 @@ sudo apt install python3-pip
 ```
 ## Windows:
 ```bash
-python get-pip.py
+python -m pip install --upgrade pip
 ```
 
 # Clone o repositório
